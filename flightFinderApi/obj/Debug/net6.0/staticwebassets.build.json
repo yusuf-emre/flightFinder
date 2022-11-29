@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "K3hFBDgzfhskbUiWbbGJRbTfgbdjlUJ456O0UtlYLs4=",
+  "Source": "flightFinderApi",
+  "BasePath": "_content/flightFinderApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
