@@ -24,7 +24,10 @@ namespace flightFinderApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var flights = await _context.Flights.ToListAsync();
+            var flights = await _context.Flights
+                .Include(f => f.Itineraries)
+                .ThenInclude(i => i.Prices)
+                .ToListAsync();
             return Ok(flights);
         }
 
@@ -38,6 +41,8 @@ namespace flightFinderApi.Controllers
             }
 
             var flight = await _context.Flights
+                .Include(f => f.Itineraries)
+                .ThenInclude(i => i.Prices)
                 .FirstOrDefaultAsync(m => m.FlightId == id);
             if (flight == null)
             {
@@ -45,13 +50,6 @@ namespace flightFinderApi.Controllers
             }
 
             return Ok(flight);
-        }
-
-        // GET: Flights/Create
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return Ok();
         }
 
         // POST: Flights/Create
@@ -70,27 +68,10 @@ namespace flightFinderApi.Controllers
             return Ok(flight);
         }
 
-        // GET: Flights/Edit/5
-        [HttpGet]
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null || _context.Flights == null)
-            {
-                return NotFound();
-            }
-
-            var flight = await _context.Flights.FindAsync(id);
-            if (flight == null)
-            {
-                return NotFound();
-            }
-            return Ok(flight);
-        }
-
         // POST: Flights/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("FlightsId,DepartureDestination,ArrivalDestination")] Flight flight)
         {

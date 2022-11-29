@@ -20,10 +20,10 @@ public class FlightContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Flight>()
-            .HasKey(i => i.FlightId);
+            .HasKey(f => f.FlightId);
         modelBuilder.Entity<Itinerary>()
             .HasKey(i => i.ItineraryId);
         modelBuilder.Entity<Price>()
-            .HasKey(i => i.PriceId);
+            .HasKey(p => p.PriceId);
     }
 }
