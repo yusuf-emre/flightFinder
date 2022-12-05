@@ -17,10 +17,9 @@ public static class SeedData
                 return;
             }
 
-            //get the json file from the wwwroot folder.
             var env = provider.GetRequiredService<IWebHostEnvironment>();
             var path = Path.Combine(env.ContentRootPath, "data.json");
-            //read the json content and then deserialize it to object,
+
             var jsonString = System.IO.File.ReadAllText(path);
             if (jsonString != null)
             {
@@ -30,7 +29,7 @@ public static class SeedData
                 {
                     foreach(var flight in jsonFlights)
                     {
-                        context.Flights.Add(flight); //insert the data to the database.
+                        context.Flights.Add(flight);
                         context.SaveChanges();
                     }
                 }

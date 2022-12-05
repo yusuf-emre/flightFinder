@@ -31,9 +31,9 @@ namespace flightFinderApi.Controllers
             return Ok(flights);
         }
 
-        // GET: Flights/Details/5
+        // GET: Flights/GetById/5
         [HttpGet]
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> GetById(string id)
         {
             if (id == null || _context.Flights == null)
             {
@@ -44,6 +44,37 @@ namespace flightFinderApi.Controllers
                 .Include(f => f.Itineraries)
                 .ThenInclude(i => i.Prices)
                 .FirstOrDefaultAsync(m => m.FlightId == id);
+            if (flight == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(flight);
+        }
+
+        // GET: Flights/Details/5
+        [HttpGet]
+        public async Task<IActionResult> GetFilteredList(string departureDestination, string arrivalDestination, string departureAt, string? returnAt, int numberOfAdults, int numberOfChildren)
+        {
+            if (departureDestination == null ||
+                arrivalDestination == null ||
+                departureAt == null ||
+                numberOfAdults == 0 ||
+                numberOfChildren == 0 ||
+                _context.Flights == null)
+            {
+                return NotFound();
+            }
+
+            var flight = await _context.Flights
+                .Where(f => f.DepartureDestination == departureDestination)
+                .Where(f => f.ArrivalDestination == arrivalDestination)
+                .Include(f => f.Itineraries
+                    .Where(i => DateTime.Parse(departureAt) == i.DepartureAt.Date ||
+                                DateTime.Parse(returnAt) == i.DepartureAt.Date)
+                    .Where(i => i.AvailableSeats >= numberOfAdults + numberOfChildren))
+                .ThenInclude(i => i.Prices)
+                .ToListAsync();
             if (flight == null)
             {
                 return NotFound();
