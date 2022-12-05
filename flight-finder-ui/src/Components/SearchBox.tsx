@@ -62,9 +62,9 @@ const SearchBox = ({
                   <p className="h-dark">From</p>
                   <select className="col-md-12 border-0 outline-none" onChange={(e) => setDepartureDestination(e.target.value)}>
                     <option value="" hidden selected>
-                      Oslo
+                      {departureDestination}
                     </option>
-                    <option value="Stockholm">Stockholm</option>{" "}
+                    <option value="Stockholm">Stockholm</option>
                     <option value="Oslo">Oslo</option>
                     <option value="Amsterdam">Amsterdam</option>
                   </select>
@@ -75,9 +75,9 @@ const SearchBox = ({
                   <p className="h-dark">To</p>
                   <select className="col-md-12 border-0 outline-none" onChange={(e) => setArrivalDestination(e.target.value)}>
                     <option value="" hidden selected>
-                      Amsterdam
+                      {arrivalDestination}
                     </option>
-                    <option value="Stockholm">Stockholm</option>{" "}
+                    <option value="Stockholm">Stockholm</option>
                     <option value="Oslo">Oslo</option>
                     <option value="Amsterdam">Amsterdam</option>
                   </select>
@@ -111,7 +111,7 @@ const SearchBox = ({
               </div>
               <div className="col-md-2 mb-4">
                 <div className="form-control d-flex flex-column">
-                  <p className="h-dark">Child/Children(0-17)</p>
+                  <p className="h-dark">Children(0-17)</p>
                   <select className="border-0 outline-none" onChange={(e) => setNumberOfChildren(Number(e.target.value))}>
                     <option value="" hidden selected>
                       0
@@ -141,7 +141,7 @@ const SearchBox = ({
                   </div>
                 </div>
                 <div className="col-md-8 mb-2 btn btn-submit text-center" onClick={handleClick}>
-                  All Flights
+                  Find Flights
                 </div>
               </div>
             </div>

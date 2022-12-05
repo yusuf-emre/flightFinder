@@ -59,8 +59,6 @@ namespace flightFinderApi.Controllers
             if (departureDestination == null ||
                 arrivalDestination == null ||
                 departureAt == null ||
-                numberOfAdults == 0 ||
-                numberOfChildren == 0 ||
                 _context.Flights == null)
             {
                 return NotFound();

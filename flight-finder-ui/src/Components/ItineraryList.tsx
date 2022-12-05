@@ -14,7 +14,6 @@ const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSear
 
   return (
     <>
-      {/* Outbound */}
       {isSearched &&
         <div>
           <div className="list-header rounded shadow-lg">
@@ -30,7 +29,6 @@ const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSear
           </div>
         </div>
       }
-      {/* Return */}
       {isSearched && !isOneWayTrip &&
         <div>
           <div className="list-header rounded shadow-lg">
