@@ -7,10 +7,12 @@ interface ItineraryListProps {
   departureAt: Date;
   returnAt: Date;
   isSearched: boolean;
+  departureDestination: string;
+  arrivalDestination: string;
 }
 
 
-const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSearched }: ItineraryListProps) => {
+const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSearched, departureDestination, arrivalDestination }: ItineraryListProps) => {
 
   return (
     <>
@@ -21,11 +23,12 @@ const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSear
           </div>
           <div className="list-header rounded shadow-lg">
             {flightList
-              .map(flight => (flight.itineraries
-                // .filter(i => i.departureAt == departureAt)
+              .filter(f => f.departureDestination === departureDestination)
+              .map(flight => flight.itineraries
+                .filter(i => new Date(i.departureAt).toDateString() === new Date(departureAt).toDateString())
                 .map(itinerary =>
                   <ItineraryCard flight={flight} itinerary={itinerary} />
-                )))}
+                ))}
           </div>
         </div>
       }
@@ -35,9 +38,13 @@ const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSear
             <p className="h-dark-title">Return: {moment(returnAt).format('LL')}</p>
           </div>
           <div className="list-header rounded shadow-lg">
-            {flightList.map(flight => (flight.itineraries.map(itinerary =>
-              <ItineraryCard flight={flight} itinerary={itinerary} />
-            )))}
+            {flightList
+              .filter(f => f.departureDestination === arrivalDestination)
+              .map(flight => flight.itineraries
+                .filter(i => new Date(i.departureAt).toDateString() === new Date(returnAt).toDateString())
+                .map(itinerary =>
+                  <ItineraryCard flight={flight} itinerary={itinerary} />
+                ))}
           </div>
         </div>
       }

@@ -2,6 +2,7 @@ import './App.css';
 import ItineraryList from './Components/ItineraryList';
 import Search from "./Components/SearchBox";
 import React, { useState } from 'react';
+import PassengerInfo from './Components/PassengerInfo';
 
 
 function App() {
@@ -14,6 +15,20 @@ function App() {
   const [returnAt, setReturnAt] = useState<Date>(new Date());
   const [numberOfAdults, setNumberOfAdults] = useState<number>(0);
   const [numberOfChildren, setNumberOfChildren] = useState<number>(0);
+  const [outboundData, setOutboundData] = useState({
+    departureAt: "",
+    arriveAt: "",
+    adultPrice: "",
+    childPrice: "",
+    availableSeats: "",
+})
+  const [returnData, setReturnData] = useState({
+    departureAt: "",
+    arriveAt: "",
+    adultPrice: "",
+    childPrice: "",
+    availableSeats: "",
+})
   // const [outboundDepartureAt, setOutboundDepartureAt] = useState<Date>();
   // const [outboundArriveAt, setOutboundArriveAt] = useState<Date>();
   // const [outboundAdultPrice, setOutboundAdultPrice] = useState<number>(0);
@@ -57,7 +72,10 @@ function App() {
         departureAt={departureAt}
         returnAt={returnAt}
         isSearched={isSearched}
+        departureDestination={departureDestination}
+        arrivalDestination={arrivalDestination}
       />
+      <PassengerInfo />
     </div>
   );
 }

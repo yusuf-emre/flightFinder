@@ -65,8 +65,8 @@ namespace flightFinderApi.Controllers
             }
 
             var flight = await _context.Flights
-                .Where(f => f.DepartureDestination == departureDestination)
-                .Where(f => f.ArrivalDestination == arrivalDestination)
+                .Where(f => f.DepartureDestination == departureDestination || f.DepartureDestination == arrivalDestination )
+                .Where(f => f.ArrivalDestination == arrivalDestination || f.ArrivalDestination == departureDestination)
                 .Include(f => f.Itineraries
                     .Where(i => DateTime.Parse(departureAt) == i.DepartureAt.Date ||
                                 DateTime.Parse(returnAt) == i.DepartureAt.Date)
