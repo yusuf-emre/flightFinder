@@ -9,15 +9,31 @@ interface ItineraryListProps {
   isSearched: boolean;
   departureDestination: string;
   arrivalDestination: string;
+  outboundTrip: Trip;
+  setOutboundTrip: (outboundTrip: Trip) => void;
+  returnTrip: Trip;
+  setReturnTrip: (returnTrip: Trip) => void;
 }
 
 
-const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSearched, departureDestination, arrivalDestination }: ItineraryListProps) => {
+const ItineraryList = ({
+  flightList,
+  isOneWayTrip,
+  departureAt,
+  returnAt,
+  isSearched,
+  departureDestination,
+  arrivalDestination,
+  outboundTrip,
+  setOutboundTrip,
+  returnTrip,
+  setReturnTrip
+}: ItineraryListProps) => {
 
   return (
     <>
       {isSearched &&
-        <div>
+        <div id="outboundTrip">
           <div className="list-header rounded shadow-lg">
             <p className="h-dark-title">Outbound: {moment(departureAt).format('LL')}</p>
           </div>
@@ -26,14 +42,23 @@ const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSear
               .filter(f => f.departureDestination === departureDestination)
               .map(flight => flight.itineraries
                 .filter(i => new Date(i.departureAt).toDateString() === new Date(departureAt).toDateString())
-                .map(itinerary =>
-                  <ItineraryCard flight={flight} itinerary={itinerary} />
+                .map((itinerary) =>
+                  <ItineraryCard
+                    flight={flight}
+                    itinerary={itinerary}
+                    isOneWayTrip={isOneWayTrip}
+                    outboundTrip={outboundTrip}
+                    setOutboundTrip={setOutboundTrip}
+                    returnTrip={returnTrip}
+                    setReturnTrip={setReturnTrip}
+                    departureDestination={departureDestination}
+                  />
                 ))}
           </div>
         </div>
       }
       {isSearched && !isOneWayTrip &&
-        <div>
+        <div id="returnTrip">
           <div className="list-header rounded shadow-lg">
             <p className="h-dark-title">Return: {moment(returnAt).format('LL')}</p>
           </div>
@@ -42,8 +67,17 @@ const ItineraryList = ({ flightList, isOneWayTrip, departureAt, returnAt, isSear
               .filter(f => f.departureDestination === arrivalDestination)
               .map(flight => flight.itineraries
                 .filter(i => new Date(i.departureAt).toDateString() === new Date(returnAt).toDateString())
-                .map(itinerary =>
-                  <ItineraryCard flight={flight} itinerary={itinerary} />
+                .map((itinerary) =>
+                  <ItineraryCard
+                    flight={flight}
+                    itinerary={itinerary}
+                    isOneWayTrip={isOneWayTrip}
+                    outboundTrip={outboundTrip}
+                    setOutboundTrip={setOutboundTrip}
+                    returnTrip={returnTrip}
+                    setReturnTrip={setReturnTrip}
+                    departureDestination={departureDestination}
+                  />
                 ))}
           </div>
         </div>

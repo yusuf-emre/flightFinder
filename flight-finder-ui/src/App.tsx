@@ -1,9 +1,8 @@
 import './App.css';
 import ItineraryList from './Components/ItineraryList';
-import Search from "./Components/SearchBox";
-import React, { useState } from 'react';
+import SearchBox from "./Components/SearchBox";
+import { useState } from 'react';
 import PassengerInfo from './Components/PassengerInfo';
-
 
 function App() {
   const [flightList, setFlightList] = useState<Flight[]>([]);
@@ -15,30 +14,29 @@ function App() {
   const [returnAt, setReturnAt] = useState<Date>(new Date());
   const [numberOfAdults, setNumberOfAdults] = useState<number>(0);
   const [numberOfChildren, setNumberOfChildren] = useState<number>(0);
-  const [outboundData, setOutboundData] = useState({
-    departureAt: "",
-    arriveAt: "",
-    adultPrice: "",
-    childPrice: "",
-    availableSeats: "",
-})
-  const [returnData, setReturnData] = useState({
-    departureAt: "",
-    arriveAt: "",
-    adultPrice: "",
-    childPrice: "",
-    availableSeats: "",
-})
-  // const [outboundDepartureAt, setOutboundDepartureAt] = useState<Date>();
-  // const [outboundArriveAt, setOutboundArriveAt] = useState<Date>();
-  // const [outboundAdultPrice, setOutboundAdultPrice] = useState<number>(0);
-  // const [outboundChildPrice, setOutboundChildPrice] = useState<number>(0);
-  // const [outboundAvailableSeats, setOutboundAvailableSeats] = useState<number>(0);
-  // const [returnDepartureAt, setReturnDepartureAt] = useState<Date>();
-  // const [returnArriveAt, setReturnArriveAt] = useState<Date>();
-  // const [returnAdultPrice, setReturnAdultPrice] = useState<number>(0);
-  // const [returnChildPrice, setReturnChildPrice] = useState<number>(0);
-  // const [returnAvailableSeats, setReturnAvailableSeats] = useState<number>(0);
+
+  const [outboundTrip, setOutboundTrip] = useState<Trip>({
+    departureDestination: "",
+    arrivalDestination: "",
+    departureAt: new Date(),
+    arriveAt: new Date(),
+    durationHours: 0,
+    adultPrice: 0,
+    childPrice: 0,
+    availableSeats: 0,
+    isBooked: false,
+  });
+  const [returnTrip, setReturnTrip] = useState<Trip>({
+    departureDestination: "",
+    arrivalDestination: "",
+    departureAt: new Date(),
+    arriveAt: new Date(),
+    durationHours: 0,
+    adultPrice: 0,
+    childPrice: 0,
+    availableSeats: 0,
+    isBooked: false,
+  })
   // const [isChild, setIsChild] = useState<boolean>(false);
   // const [firstName, setFirstName] = useState<string>("");
   // const [lastName, setLastName] = useState<string>("");
@@ -48,7 +46,7 @@ function App() {
 
   return (
     <div className="App">
-      <Search
+      <SearchBox
         isOneWayTrip={isOneWayTrip}
         setIsOneWayTrip={setIsOneWayTrip}
         setDepartureDestination={setDepartureDestination}
@@ -64,6 +62,7 @@ function App() {
         numberOfChildren={numberOfChildren}
         setNumberOfChildren={setNumberOfChildren}
         setFlightList={setFlightList}
+        isSearched={isSearched}
         setIsSearched={setIsSearched}
       />
       <ItineraryList
@@ -74,8 +73,15 @@ function App() {
         isSearched={isSearched}
         departureDestination={departureDestination}
         arrivalDestination={arrivalDestination}
+        outboundTrip={outboundTrip}
+        setOutboundTrip={setOutboundTrip}
+        returnTrip={returnTrip}
+        setReturnTrip={setReturnTrip}
       />
-      <PassengerInfo />
+      <PassengerInfo
+        isOneWayTrip={isOneWayTrip}
+        outboundTrip={outboundTrip}
+        returnTrip={returnTrip} />
     </div>
   );
 }

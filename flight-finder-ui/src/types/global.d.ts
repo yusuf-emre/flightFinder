@@ -22,28 +22,19 @@ declare global {
     adultPrice: number;
     childPrice: number;
   };
-  
-  interface UserSearchInfo{
-    isOneWayTrip: boolean;
+
+  interface Trip{
     departureDestination: string;
-    arrivalDestination: string;
+    arrivalDestination: string;    
     departureAt: Date;
-    returnAt: Date;
-    numberOfAdults: number;
-    numberOfChildren: number;
+    arriveAt: Date;
+    durationHours: number;
+    adultPrice: number;
+    childPrice: number;
+    availableSeats: number;
+    isBooked: boolean;
   }
-  interface UserFlightInfo{
-    outboundDepartureAt: Date;
-    outboundArriveAt: Date;
-    outBoundAdultPrice: number;
-    outBoundChildPrice: number;
-    outBoundAvailableSeats: number;
-    returnDepartureAt: Date;
-    returnArriveAt: Date;
-    returnAdultPrice: number;
-    returnChildPrice: number;
-    returnAvailableSeats: number;    
-  }
+
   interface PassengerInfo{
     isChild: boolean;
     firstName: string;

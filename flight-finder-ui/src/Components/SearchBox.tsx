@@ -1,4 +1,4 @@
-
+// import { Navigate } from "react-router-dom";
 
 interface SearchBoxProps {
   isOneWayTrip: boolean;
@@ -16,6 +16,7 @@ interface SearchBoxProps {
   numberOfChildren: number
   setNumberOfChildren: (numberOfChildren: number) => void;
   setFlightList: (flightList: Flight[]) => void;
+  isSearched: boolean;
   setIsSearched: (isSearched: boolean) => void;
 }
 
@@ -35,20 +36,21 @@ const SearchBox = ({
   numberOfChildren,
   setNumberOfChildren,
   setFlightList,
+  isSearched,
   setIsSearched
 }: SearchBoxProps) => {
 
   const handleClick = () => {
+    setIsSearched(true);
     const api = async () => {
       const data = await fetch(`https://localhost:7188/api/Flights/GetFilteredList?departureDestination=${departureDestination}&arrivalDestination=${arrivalDestination}&departureAt=${departureAt.toDateString()}&returnAt=${returnAt.toDateString()}&numberOfAdults=${numberOfAdults}&numberOfChildren=${numberOfChildren}`, {
         method: "GET"
       });
       const jsonData = await data.json();
-      console.log(jsonData);
       setFlightList(jsonData);
-      setIsSearched(true);
+      window.location.href = "#outboundTrip"
     };
-    api();
+    api()
   }
 
   return (
@@ -140,7 +142,10 @@ const SearchBox = ({
                     </label>
                   </div>
                 </div>
-                <div className="col-md-8 mb-2 btn btn-submit text-center" onClick={handleClick}>
+                <div
+                  className="col-md-8 mb-2 btn btn-submit text-center"
+                  onClick={handleClick}
+                >
                   Find Flights
                 </div>
               </div>

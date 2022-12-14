@@ -1,17 +1,61 @@
 import moment from 'moment';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface FlightListProps {
   flight: Flight;
   itinerary: Itinerary;
+  isOneWayTrip: boolean;
+  outboundTrip: Trip;
+  setOutboundTrip: (outboundTrip: Trip) => void;
+  returnTrip: Trip;
+  setReturnTrip: (returnTrip: Trip) => void;
+  departureDestination: string;
 }
 
-const ItineraryCard = ({ flight, itinerary }: FlightListProps) => {
+const ItineraryCard = ({
+  flight,
+  itinerary,
+  isOneWayTrip,
+  outboundTrip,
+  setOutboundTrip,
+  returnTrip,
+  setReturnTrip,
+  departureDestination,
+}: FlightListProps) => {
 
   const [showMore, setShowMore] = useState(false);
+
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
+
+  const trip = {
+    departureDestination: flight.departureDestination,
+    arrivalDestination: flight.arrivalDestination,
+    departureAt: itinerary.departureAt,
+    arriveAt: itinerary.arriveAt,
+    durationHours: (new Date(itinerary.arriveAt).getTime() - new Date(itinerary.departureAt).getTime()) / (1000 * 60 * 60),
+    adultPrice: itinerary.prices[0].adultPrice,
+    childPrice: itinerary.prices[0].childPrice,
+    availableSeats: itinerary.availableSeats,
+    isBooked: true,
+  }
+  const handleBookClick = () => {
+    if (flight.departureDestination === departureDestination) {
+      setOutboundTrip(trip);
+      setTimeout(() => {
+        window.location.href = isOneWayTrip || returnTrip.isBooked ? "#passengerInfo" : "#returnTrip";
+      }, 100);
+    }
+    else {
+      setReturnTrip(trip);
+      setTimeout(() => {
+        window.location.href = outboundTrip.isBooked ? "#passengerInfo" : "#outboundTrip";
+      }, 100);
+    }
+  }
+
+
 
   return (
     <>
@@ -19,7 +63,7 @@ const ItineraryCard = ({ flight, itinerary }: FlightListProps) => {
         <div className="container rounded shadow-lg">
           <div className="row">
             <div className={showMore ? "col-md-2" : "col-md-3"}>
-              <div className="input-height form-control d-flex flex-column">
+              <div id="departureDestination" className="input-height form-control d-flex flex-column">
                 <p className="h-dark">Departure</p>
                 <p className="h-dark-text">
                   {moment(itinerary.departureAt).format('LLL')}
@@ -39,7 +83,7 @@ const ItineraryCard = ({ flight, itinerary }: FlightListProps) => {
             <div className="col-md-2">
               <div className="input-height form-control d-flex flex-column">
                 <p className="h-dark">Duration</p>
-                <p className="h-dark-text">{(new Date(itinerary.arriveAt).getTime()-new Date(itinerary.departureAt).getTime())/(1000*60*60)} hours</p>
+                <p className="h-dark-text">{(new Date(itinerary.arriveAt).getTime() - new Date(itinerary.departureAt).getTime()) / (1000 * 60 * 60)} hours</p>
               </div>
             </div>
             <div className={showMore ? "col-md-1" : "col-md-2"}>
@@ -86,12 +130,12 @@ const ItineraryCard = ({ flight, itinerary }: FlightListProps) => {
             <div
               className="col-md-2 me-auto align-items-center"
               style={{
-                display: showMore ? "block" : "none",
+                display: showMore ? "block" : "none"
               }}
+              onClick={handleBookClick}
             >
               <div
-                className="input-height btn btn-secondary btn-submit form-control text-center"
-                onClick={handleShowMore}
+                className="input-height btn btn-submit form-control text-center "
               >
                 Book
               </div>
