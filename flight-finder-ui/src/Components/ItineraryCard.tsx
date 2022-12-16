@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 interface FlightListProps {
   flight: Flight;
@@ -40,22 +40,21 @@ const ItineraryCard = ({
     availableSeats: itinerary.availableSeats,
     isBooked: true,
   }
+
   const handleBookClick = () => {
     if (flight.departureDestination === departureDestination) {
       setOutboundTrip(trip);
       setTimeout(() => {
-        window.location.href = isOneWayTrip || returnTrip.isBooked ? "#passengerInfo" : "#returnTrip";
+        window.location.href = isOneWayTrip || returnTrip.isBooked ? "#passengerList" : "#returnTrip";
       }, 100);
     }
     else {
       setReturnTrip(trip);
       setTimeout(() => {
-        window.location.href = outboundTrip.isBooked ? "#passengerInfo" : "#outboundTrip";
+        window.location.href = outboundTrip.isBooked ? "#passengerList" : "#outboundTrip";
       }, 100);
     }
   }
-
-
 
   return (
     <>

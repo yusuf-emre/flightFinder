@@ -1,14 +1,14 @@
 export { };
 
 declare global {
-  type Flight = {
+  interface Flight{
     flightId: string;
     departureDestination: string;
     arrivalDestination: string;
     itineraries: Itinerary[];
   };
 
-  type Itinerary = {
+  interface Itinerary{
     itineraryId: number;
     departureAt: Date;
     arriveAt: Date;
@@ -16,7 +16,7 @@ declare global {
     prices: Price[];
   };
 
-  type Price = {
+  interface Price{
     priceId: number;
     currency: string;
     adultPrice: number;
@@ -35,11 +35,11 @@ declare global {
     isBooked: boolean;
   }
 
-  interface PassengerInfo{
-    isChild: boolean;
+  interface Passenger{
+    guest: string;
     firstName: string;
     lastName: string;
-    isMale: boolean;
+    gender: string;
     mobile: number;
     email: string;
   }

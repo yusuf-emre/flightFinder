@@ -2,7 +2,9 @@ import './App.css';
 import ItineraryList from './Components/ItineraryList';
 import SearchBox from "./Components/SearchBox";
 import { useState } from 'react';
-import PassengerInfo from './Components/PassengerInfo';
+import PassengerList from './Components/PassengerList';
+import PassengerCard from './Components/PassengerCard';
+import ConfirmBook from './Components/ConfirmBook';
 
 function App() {
   const [flightList, setFlightList] = useState<Flight[]>([]);
@@ -37,12 +39,11 @@ function App() {
     availableSeats: 0,
     isBooked: false,
   })
-  // const [isChild, setIsChild] = useState<boolean>(false);
-  // const [firstName, setFirstName] = useState<string>("");
-  // const [lastName, setLastName] = useState<string>("");
-  // const [isMale, setIsMale] = useState<boolean>();
-  // const [mobile, setMobile] = useState<number>(0);
-  // const [email, setEmail] = useState<string>("");
+
+  const [passengerList, setPassengerList] = useState<Passenger[]>([]);
+	const [numberOfPassengersAdded, setNumberOfPassengersAdded] = useState<number>(0);
+
+
 
   return (
     <div className="App">
@@ -62,8 +63,9 @@ function App() {
         numberOfChildren={numberOfChildren}
         setNumberOfChildren={setNumberOfChildren}
         setFlightList={setFlightList}
-        isSearched={isSearched}
         setIsSearched={setIsSearched}
+        passengerList={passengerList}
+        setPassengerList={setPassengerList}
       />
       <ItineraryList
         flightList={flightList}
@@ -78,10 +80,14 @@ function App() {
         returnTrip={returnTrip}
         setReturnTrip={setReturnTrip}
       />
-      <PassengerInfo
+      <PassengerList
         isOneWayTrip={isOneWayTrip}
         outboundTrip={outboundTrip}
-        returnTrip={returnTrip} />
+        returnTrip={returnTrip}
+        passengerList={passengerList}
+        setPassengerList={setPassengerList}
+      />
+      <ConfirmBook />
     </div>
   );
 }

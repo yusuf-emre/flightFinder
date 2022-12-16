@@ -1,4 +1,3 @@
-// import { Navigate } from "react-router-dom";
 
 interface SearchBoxProps {
   isOneWayTrip: boolean;
@@ -16,8 +15,9 @@ interface SearchBoxProps {
   numberOfChildren: number
   setNumberOfChildren: (numberOfChildren: number) => void;
   setFlightList: (flightList: Flight[]) => void;
-  isSearched: boolean;
   setIsSearched: (isSearched: boolean) => void;
+  passengerList: Passenger[];
+  setPassengerList: (passengerList: Passenger[]) => void;
 }
 
 const SearchBox = ({
@@ -36,11 +36,21 @@ const SearchBox = ({
   numberOfChildren,
   setNumberOfChildren,
   setFlightList,
-  isSearched,
-  setIsSearched
+  setIsSearched,
+  passengerList,
+  setPassengerList
 }: SearchBoxProps) => {
 
   const handleClick = () => {
+    setPassengerList(Array(numberOfAdults + numberOfChildren).fill({
+      guest: "",
+      firstName: "",
+      lastName: "",
+      gender: "",
+      mobile: 0,
+      email: "",
+    }));
+    
     setIsSearched(true);
     const api = async () => {
       const data = await fetch(`https://localhost:7188/api/Flights/GetFilteredList?departureDestination=${departureDestination}&arrivalDestination=${arrivalDestination}&departureAt=${departureAt.toDateString()}&returnAt=${returnAt.toDateString()}&numberOfAdults=${numberOfAdults}&numberOfChildren=${numberOfChildren}`, {
@@ -55,7 +65,7 @@ const SearchBox = ({
 
   return (
     <>
-      <div className="App">
+      <div className="SearchBox">
         <div className="container rounded shadow-lg">
           <form action="">
             <div className="row">
@@ -107,13 +117,13 @@ const SearchBox = ({
                       0
                     </option>
                     <option value="1">1</option> <option value="2">2</option>
-                    <option value="3">3</option> <option value="3">4</option>
+                    <option value="3">3</option> <option value="4">4</option>
                   </select>
                 </div>
               </div>
               <div className="col-md-2 mb-4">
                 <div className="form-control d-flex flex-column">
-                  <p className="h-dark">Children(0-17)</p>
+                  <p className="h-dark">Children</p>
                   <select className="border-0 outline-none" onChange={(e) => setNumberOfChildren(Number(e.target.value))}>
                     <option value="" hidden selected>
                       0
