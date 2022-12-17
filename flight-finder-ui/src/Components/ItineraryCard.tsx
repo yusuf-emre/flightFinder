@@ -67,7 +67,9 @@ const ItineraryCard = ({
                 <p className="h-dark-text">
                   {moment(itinerary.departureAt).format('LLL')}
                 </p>
+                <p className="h-dark-text">
                 {flight.departureDestination}
+                </p>
               </div>
             </div>
             <div className={showMore ? "col-md-2" : "col-md-3"}>
@@ -76,7 +78,9 @@ const ItineraryCard = ({
                 <p className="h-dark-text">
                   {moment(itinerary.arriveAt).format('LLL')}
                 </p>
-                {flight.arrivalDestination}
+                <p className="h-dark-text">
+                  {flight.arrivalDestination}
+                </p>
               </div>
             </div>
             <div className="col-md-2">

@@ -37,7 +37,6 @@ const SearchBox = ({
   setNumberOfChildren,
   setFlightList,
   setIsSearched,
-  passengerList,
   setPassengerList
 }: SearchBoxProps) => {
 
@@ -58,7 +57,9 @@ const SearchBox = ({
       });
       const jsonData = await data.json();
       setFlightList(jsonData);
-      window.location.href = "#outboundTrip"
+      setTimeout(() => {
+        window.location.href = "#outboundTrip"
+      }, 100);
     };
     api()
   }

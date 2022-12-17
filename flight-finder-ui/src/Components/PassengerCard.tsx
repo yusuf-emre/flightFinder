@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 
@@ -7,6 +6,7 @@ interface passengerProps {
 	passenger: Passenger;
 	passengerList: Passenger[];
 	setPassengerList: (passengerList: Passenger[]) => void;
+  setShowConfirmBook: (showConfirmBook: boolean) => void;
 }
 
 const PassengerCard = ({
@@ -14,6 +14,7 @@ const PassengerCard = ({
 	passenger,
 	passengerList,
 	setPassengerList,
+	setShowConfirmBook
 }: passengerProps) => {
 
 
@@ -25,6 +26,8 @@ const PassengerCard = ({
 	}
 
 	const handleClick = () => {
+		console.log(passenger);
+		console.log(passengerList);
 		if (Object.values(passenger).some(v => v === "" || v === 0)) {
 			Swal.fire({
 				icon: "warning",
@@ -42,8 +45,9 @@ const PassengerCard = ({
 			})
 			
 			if (passengerList.every(p => Object.values(p).every(v => v !== "" && v !== 0))) {
+				setShowConfirmBook(true);
 				setTimeout(() => {
-					window.location.href = "#outboundTrip";
+					window.location.href = "#confirmBook";
 				}, 100); 
 			}
 		}

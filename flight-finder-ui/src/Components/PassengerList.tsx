@@ -6,6 +6,7 @@ interface PassengerListProps {
   returnTrip: Trip;
   passengerList: Passenger[];
   setPassengerList: (passengerList: Passenger[]) => void;
+  setShowConfirmBook: (showConfirmBook: boolean) => void;
 }
 
 
@@ -15,6 +16,7 @@ const PassengerList = ({
   returnTrip,
   passengerList,
   setPassengerList,
+  setShowConfirmBook
 }: PassengerListProps) => {
 
   return (
@@ -32,6 +34,7 @@ const PassengerList = ({
                   passenger={passenger}
                   passengerList={passengerList}
                   setPassengerList={setPassengerList}
+                  setShowConfirmBook={setShowConfirmBook}
                 />
               )}
           </div>

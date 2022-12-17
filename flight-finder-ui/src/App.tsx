@@ -3,7 +3,6 @@ import ItineraryList from './Components/ItineraryList';
 import SearchBox from "./Components/SearchBox";
 import { useState } from 'react';
 import PassengerList from './Components/PassengerList';
-import PassengerCard from './Components/PassengerCard';
 import ConfirmBook from './Components/ConfirmBook';
 
 function App() {
@@ -41,7 +40,7 @@ function App() {
   })
 
   const [passengerList, setPassengerList] = useState<Passenger[]>([]);
-	const [numberOfPassengersAdded, setNumberOfPassengersAdded] = useState<number>(0);
+  const [showConfirmBook, setShowConfirmBook] = useState<boolean>(false);
 
 
 
@@ -86,8 +85,17 @@ function App() {
         returnTrip={returnTrip}
         passengerList={passengerList}
         setPassengerList={setPassengerList}
+        setShowConfirmBook={setShowConfirmBook}
       />
-      <ConfirmBook />
+      <ConfirmBook
+        passengerList={passengerList}
+        outboundTrip={outboundTrip}
+        returnTrip={returnTrip}
+        showConfirmBook={showConfirmBook}
+        numberOfAdults={numberOfAdults}
+        numberOfChildren={numberOfChildren}
+        isOneWayTrip={isOneWayTrip}
+      />
     </div>
   );
 }
