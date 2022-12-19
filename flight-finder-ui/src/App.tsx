@@ -24,6 +24,8 @@ function App() {
     durationHours: 0,
     adultPrice: 0,
     childPrice: 0,
+    itineraryId: 0,
+    priceId: 0,
     availableSeats: 0,
     isBooked: false,
   });
@@ -35,6 +37,8 @@ function App() {
     durationHours: 0,
     adultPrice: 0,
     childPrice: 0,
+    itineraryId: 0,
+    priceId: 0,
     availableSeats: 0,
     isBooked: false,
   })

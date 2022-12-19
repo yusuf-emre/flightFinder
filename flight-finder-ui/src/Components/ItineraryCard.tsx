@@ -37,6 +37,8 @@ const ItineraryCard = ({
     durationHours: (new Date(itinerary.arriveAt).getTime() - new Date(itinerary.departureAt).getTime()) / (1000 * 60 * 60),
     adultPrice: itinerary.prices[0].adultPrice,
     childPrice: itinerary.prices[0].childPrice,
+    itineraryId: itinerary.itineraryId,
+    priceId: itinerary.prices[0].priceId,
     availableSeats: itinerary.availableSeats,
     isBooked: true,
   }

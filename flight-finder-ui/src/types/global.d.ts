@@ -31,6 +31,8 @@ declare global {
     durationHours: number;
     adultPrice: number;
     childPrice: number;
+    itineraryId: number;
+    priceId: number;
     availableSeats: number;
     isBooked: boolean;
   }

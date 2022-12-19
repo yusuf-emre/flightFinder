@@ -26,8 +26,6 @@ const PassengerCard = ({
 	}
 
 	const handleClick = () => {
-		console.log(passenger);
-		console.log(passengerList);
 		if (Object.values(passenger).some(v => v === "" || v === 0)) {
 			Swal.fire({
 				icon: "warning",

@@ -85,7 +85,6 @@ namespace flightFinderApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FlightsId,DepartureDestination,ArrivalDestination")] Flight flight)
         {
             if (ModelState.IsValid)
@@ -101,7 +100,6 @@ namespace flightFinderApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("FlightsId,DepartureDestination,ArrivalDestination")] Flight flight)
         {
             if (id != flight.FlightId)
@@ -153,7 +151,6 @@ namespace flightFinderApi.Controllers
 
         // POST: Flights/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Flights == null)
