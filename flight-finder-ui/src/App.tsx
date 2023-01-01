@@ -16,32 +16,8 @@ function App() {
   const [numberOfAdults, setNumberOfAdults] = useState<number>(0);
   const [numberOfChildren, setNumberOfChildren] = useState<number>(0);
 
-  const [outboundTrip, setOutboundTrip] = useState<Trip>({
-    departureDestination: "",
-    arrivalDestination: "",
-    departureAt: new Date(),
-    arriveAt: new Date(),
-    durationHours: 0,
-    adultPrice: 0,
-    childPrice: 0,
-    itineraryId: 0,
-    priceId: 0,
-    availableSeats: 0,
-    isBooked: false,
-  });
-  const [returnTrip, setReturnTrip] = useState<Trip>({
-    departureDestination: "",
-    arrivalDestination: "",
-    departureAt: new Date(),
-    arriveAt: new Date(),
-    durationHours: 0,
-    adultPrice: 0,
-    childPrice: 0,
-    itineraryId: 0,
-    priceId: 0,
-    availableSeats: 0,
-    isBooked: false,
-  })
+  const [outboundTrip, setOutboundTrip] = useState<Trip>({} as Trip);
+  const [returnTrip, setReturnTrip] = useState<Trip>({} as Trip);
 
   const [passengerList, setPassengerList] = useState<Passenger[]>([]);
   const [showConfirmBook, setShowConfirmBook] = useState<boolean>(false);
